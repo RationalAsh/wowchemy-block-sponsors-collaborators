@@ -1,14 +1,26 @@
-{{/* My Custom Block */}}
+{{/* Wowchemy Blocks: Sponsors */}}
+{{/* Documentation: https://wowchemy.com/blocks/ */}}
+{{/* License: https://github.com/wowchemy/wowchemy-hugo-themes/blob/main/LICENSE.md */}}
 
-{{/* Get variables */}}
+{{/* Initialise */}}
 {{ $page := .wcPage }}
 {{ $block := .wcBlock }}
+{{ $show_social := $block.design.show_social | default false }}
+{{ $show_interests := $block.design.show_interests | default true }}
+{{ $show_organizations := $block.design.show_organizations | default false }}
+{{ $show_role := $block.design.show_role | default true }}
 
-{{/* Add your block layout below */}}
-{{/* Styles can be added to the SCSS file */}}
-{{/* Access custom front matter options via $block.Params  */}}
-{{/* E.g. mytext via $block.Params.mytext */}}
+<div class="row justify-content-center">
+  {{ with $block.content.title }}
+    <div class="section-heading col-12 mb-3 text-center">
+      <h1 class="mb-0">{{ . | markdownify | emojify }}</h1>
+      {{ with $block.content.subtitle }}<p class="mt-1">{{ . | markdownify | emojify }}</p>{{ end }}
+    </div>
+  {{ end }}
 
-<h2>{{$block.Title}}</h2>
-
-<p>{{$block.Content}}</p>
+  {{ with $block.content.text }}
+    <div class="col-md-12">
+      {{ . | emojify | $page.RenderString }}
+    </div>
+  {{ end }}
+</div>
